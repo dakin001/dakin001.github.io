@@ -7,17 +7,16 @@ export class ApiService {
 
     callback;
     ajax(url) {
-        let current = this;
-        current.callback({
+        let that = this;
+        that.callback({
             isLoading: true
         })
 
         return new Promise(function (resolve, reject) {
             fetch(url)
                 .then(res => res.json())
-                .then(
-                    (result) => {
-                        current.callback({
+                .then((result) => {
+                        that.callback({
                             error: undefined,
                             isLoading: false
                         })
@@ -28,7 +27,7 @@ export class ApiService {
                     // instead of a catch() block so that we don't swallow
                     // exceptions from actual bugs in components.
                     (error) => {
-                        current.callback({
+                        that.callback({
                             error: error,
                             isLoading: false
                         })
